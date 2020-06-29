@@ -34,6 +34,14 @@ function App() {
   };
 
   const handleSelect = function (selectedItem: Contact) {
+    const index = selectedItemIndex(selectedItem.id);
+
+    if (index > -1) {
+      selected.splice(index, 1);
+      setSelected([...selected]);
+      return;
+    }
+
     setSelected(selected.concat(selectedItem));
   };
 
