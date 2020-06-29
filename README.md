@@ -1,3 +1,9 @@
+# IMPROVEMENTS
+
+1. As for the performance issues: for the count of 1000 items + 6x cpu slowdown I didnt encounter any stutters. Perhaps it would be valuable to make lists virtualized with tools like react-virtualized/react-window. For the sake of this simple task I decided to just optimize rows re-rendering with React.memo.
+
+2. Tests could (and should :D) be improved with helpers/fixtures to make them cleaner and more reusable.
+
 # TODO
 
 Please do not fork the repo, clone it instead.
