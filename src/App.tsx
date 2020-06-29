@@ -29,6 +29,9 @@ function App() {
           <PersonInfo key={personInfo.id} data={personInfo} />
         ))}
       </div>
+      <button className="btn--loadMore" onClick={() => fetchContacts()}>
+        Load more
+      </button>
     </div>
   );
 }
