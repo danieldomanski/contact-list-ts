@@ -27,9 +27,34 @@ code {
   margin: 10px 20px 0 0;
 }
 
+.person-info.person-info--selected {
+  border: 2px solid rgb(255, 73, 119);
+}
+
+.person-info {
+  display: flex;
+  padding: 24px 0;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid transparent;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.15);
+  margin: 10px 0;
+  background: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
 .person-info:hover {
-  padding: 30px;
   border: 2px solid pink;
+}
+
+.person-info.person-info--selected:hover {
+  border: 2px solid rgb(255, 73, 119);
+}
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .firstNameLastName {

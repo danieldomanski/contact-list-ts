@@ -33,18 +33,36 @@ function App() {
     return null;
   };
 
+  const handleSelect = function (selectedItem: Contact) {
+    setSelected(selected.concat(selectedItem));
+  };
+
   useEffect(() => {
     fetchContacts();
   }, []);
 
+  const selectedItemIndex = (id: string) =>
+    selected.map((s) => s.id).indexOf(id);
+
   return (
     <div className="App">
       <div className="selected">Selected contacts: {selected.length}</div>
-      <div className="list">
-        {data.map((personInfo) => (
-          <PersonInfo key={personInfo.id} data={personInfo} />
-        ))}
-      </div>
+      <ul className="list">
+        {data.map((personInfo) => {
+          const isSelected = selectedItemIndex(personInfo.id) > -1;
+          return (
+            <li
+              key={personInfo.id}
+              className={`person-info ${
+                isSelected ? "person-info--selected" : ""
+              }`}
+              onClick={() => handleSelect(personInfo)}
+            >
+              <PersonInfo key={personInfo.id} data={personInfo} />
+            </li>
+          );
+        })}
+      </ul>
       <div>{renderFetchStatus()}</div>
 
       <button className="btn--loadMore" onClick={() => fetchContacts()}>
