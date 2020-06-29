@@ -10,8 +10,10 @@ Definition of done:
 4. Error state is handled. It allows to refetch failed batch.
 5. Each contact information card is selectable.
 6. Selected contacts have outline around them.
+
 7. Selected card can be deselected.
 8. Selected contacts are displayed at the top of the list.
+
 9. List does not have performance issues when selecting/deselecting/scrolling cards.
 
 Doing this task in typescript is welcome. However if you do not feel comfortable with typescript, please change file extension to js.
