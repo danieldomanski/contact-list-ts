@@ -70,7 +70,7 @@ function App() {
           })}
         </ul>
       </div>
-      <ul className="list">
+      <ul className="list" data-testid="contact-list">
         {data.map((personInfo) => {
           const isSelected = selectedItemIndex(personInfo.id) > -1;
           return isSelected ? null : (

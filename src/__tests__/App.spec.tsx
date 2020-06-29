@@ -69,3 +69,44 @@ describe("Load more button", () => {
     await waitFor(() => expect(apiData).toBeCalledTimes(2));
   });
 });
+
+describe("Selecting/deselecting feature", () => {
+  test("Clicking on contact moves it to selected list & clicking again moves it back to 'data' list", async () => {
+    const contacts = [
+      {
+        id: "997",
+        jobTitle: "Staffing Consultant",
+        emailAddress: "Juliette_Holmes5612@zorer.org",
+        firstNameLastName: "Juliette Holmes",
+      },
+    ];
+
+    let apiDataMock = apiData as jest.mock;
+    apiDataMock.mockImplementation(() => Promise.resolve(contacts));
+
+    const { getByText, getByTestId } = render(<App />);
+
+    expect(getByText("Loading...")).toBeDefined();
+
+    await waitFor(() => expect(apiData).toReturnTimes(1));
+
+    const contactsList = getByTestId("contact-list");
+    const selectedList = getByTestId("selected-list");
+
+    expect(contactsList).toBeInTheDocument();
+    expect(selectedList).toBeInTheDocument();
+
+    expect(selectedList.childElementCount).toEqual(0);
+    expect(contactsList.childElementCount).toEqual(1);
+
+    fireEvent.click(contactsList.childNodes[0]);
+
+    expect(selectedList.childElementCount).toEqual(1);
+    expect(contactsList.childElementCount).toEqual(0);
+
+    fireEvent.click(selectedList.childNodes[0]);
+
+    expect(selectedList.childElementCount).toEqual(0);
+    expect(contactsList.childElementCount).toEqual(1);
+  });
+});
