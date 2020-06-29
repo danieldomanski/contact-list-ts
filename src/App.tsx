@@ -54,16 +54,29 @@ function App() {
 
   return (
     <div className="App">
-      <div className="selected">Selected contacts: {selected.length}</div>
+      <div className="selected">
+        <p>Selected contacts: {selected.length}</p>
+        <ul className="list" data-testid="selected-list">
+          {selected.map((personInfo) => {
+            return (
+              <li
+                key={personInfo.id}
+                className="person-info person-info--selected"
+                onClick={() => handleSelect(personInfo)}
+              >
+                <PersonInfo key={personInfo.id} data={personInfo} />
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       <ul className="list">
         {data.map((personInfo) => {
           const isSelected = selectedItemIndex(personInfo.id) > -1;
-          return (
+          return isSelected ? null : (
             <li
               key={personInfo.id}
-              className={`person-info ${
-                isSelected ? "person-info--selected" : ""
-              }`}
+              className="person-info"
               onClick={() => handleSelect(personInfo)}
             >
               <PersonInfo key={personInfo.id} data={personInfo} />
