@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import apiData from "./api";
 import PersonInfo from "./PersonInfo";
+import { Contact } from "./types";
 
 function App() {
-  const [data, setData] = React.useState([]);
-  const [selected, setSelected] = React.useState([]);
+  const [data, setData] = useState<Contact[]>([]);
+  const [selected, setSelected] = useState<Contact[]>([]);
 
-  //  TODO fetch contacts using apiData function, handle loading and error states
+  const fetchContacts = async () => {
+    try {
+      const contacts = await apiData();
+
+      setData(data.concat(contacts));
+    } catch (e) {
+      console.log({ e });
+    }
+  };
+
+  useEffect(() => {
+    fetchContacts();
+  }, []);
 
   return (
     <div className="App">
       <div className="selected">Selected contacts: {selected.length}</div>
       <div className="list">
         {data.map((personInfo) => (
-          // @ts-ignore
           <PersonInfo key={personInfo.id} data={personInfo} />
         ))}
       </div>
