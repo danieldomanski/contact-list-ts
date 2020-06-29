@@ -64,7 +64,7 @@ function App() {
                 className="person-info person-info--selected"
                 onClick={() => handleSelect(personInfo)}
               >
-                <PersonInfo key={personInfo.id} data={personInfo} />
+                <PersonInfo data={personInfo} />
               </li>
             );
           })}
@@ -79,7 +79,7 @@ function App() {
               className="person-info"
               onClick={() => handleSelect(personInfo)}
             >
-              <PersonInfo key={personInfo.id} data={personInfo} />
+              <PersonInfo data={personInfo} />
             </li>
           );
         })}

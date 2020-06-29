@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 type Props = {
   data: {
@@ -8,15 +8,16 @@ type Props = {
   };
 };
 
-function PersonInfo(props: Props) {
-  const { data } = props;
+const PersonInfo = memo(({ data }: Props) => {
+  const { firstNameLastName, jobTitle, emailAddress } = data;
+
   return (
     <>
-      <div className="firstNameLastName">{data.firstNameLastName}</div>
-      <div className="jobTitle">{data.jobTitle}</div>
-      <div className="emailAddress">{data.emailAddress}</div>
+      <div className="firstNameLastName">{firstNameLastName}</div>
+      <div className="jobTitle">{jobTitle}</div>
+      <div className="emailAddress">{emailAddress}</div>
     </>
   );
-}
+});
 
 export default PersonInfo;
