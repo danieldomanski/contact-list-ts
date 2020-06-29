@@ -1,5 +1,5 @@
 import React from "react";
-import { render, waitFor } from "@testing-library/react";
+import { render, waitFor, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import App from "../App";
 import apiData from "../api";
@@ -48,5 +48,24 @@ describe("App batch either hydrates the DOM with contacts or gives an error", ()
         getByText("There was an issue with loading resource.")
       ).toBeInTheDocument()
     );
+  });
+});
+
+describe("Load more button", () => {
+  test("Load more button exists and triggers API call", async () => {
+    let apiDataMock = apiData as jest.mock;
+    apiDataMock.mockImplementation(() => Promise.reject());
+
+    const { findByText, getByText } = render(<App />);
+
+    expect(getByText("Loading...")).toBeDefined();
+
+    const loadMoreBtn = await findByText("Load more");
+
+    await waitFor(() => expect(loadMoreBtn).toBeInTheDocument());
+
+    fireEvent.click(loadMoreBtn);
+
+    await waitFor(() => expect(apiData).toBeCalledTimes(2));
   });
 });
